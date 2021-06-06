@@ -32,12 +32,12 @@ std::vector<GLApp::GLViewport> GLApp::vps;
 std::vector<GLSLShader> GLApp::shdrpgms;
 std::list<GLApp::GLObject> GLApp::objects;
 
-bool	keyPlast			= false;	/*!< stores if p was pressed/released last frame */
-bool	mouseLeftlast		= false;	/*!< stores if moue left was pressed/released last frame */
-bool	create_objects		= true;		/*!< flag to create/kill objects */
-int		polymode			= 0;		/*!< polygon render mode */
-int		box_count			= 0;		/*!< number of boxes */
-int		mystery_count		= 0;		/*!< number of mystery shapes */
+GLboolean	keyPlast			= false;	/*!< stores if p was pressed/released last frame */
+GLboolean	mouseLeftlast		= false;	/*!< stores if moue left was pressed/released last frame */
+bool		create_objects		= true;		/*!< flag to create/kill objects */
+int			polymode			= 0;		/*!< polygon render mode */
+int			box_count			= 0;		/*!< number of boxes */
+int			mystery_count		= 0;		/*!< number of mystery shapes */
 
 void GLApp::init() {
   // empty for now
@@ -563,7 +563,7 @@ void GLApp::CreateObject()
 {
 	// initialize random engine
 	std::default_random_engine dre;
-	dre.seed(std::chrono::system_clock::now().time_since_epoch().count());
+	dre.seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
 
 	// get numbers in range [-1,-1] 
 	std::uniform_real_distribution<float> urdf(-1.0, 1.0);
@@ -630,7 +630,7 @@ void GLApp::GLObject::update(GLdouble delta_time)
 						0,			0,			1 };
 
 	// rotation matrix
-	angle_disp += angle_speed * delta_time;
+	angle_disp += angle_speed * (GLfloat)delta_time;
 	glm::mat3 m_rotation {	 cos(angle_disp),  sin(angle_disp),	0,
 							-sin(angle_disp),  cos(angle_disp),	0,
 								0,					0,			1 };

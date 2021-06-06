@@ -1,0 +1,85 @@
+12            # number of objects in scene
+square        # name of model (there should be a corresponding square.dpm in $(SolutionDir)meshes)
+Object1       # name of game object - this name must be unique in the scene
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag # names of shader program, vertex and fragment shaders for rendering model square
+1.0 0.0 0.0   # (r, g, b) color used for painting object
+200.0 150.0   # scaling factors of object along horizontal and vertices axes, respectively
+0.0 -17.5       # orientation factors of object: initial angular orientation (where am i looking at start up?) and angular speed in degrees/sec (how fast will i rotate)
+-19800 -20000 # object's position in game world
+square
+Object2
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.0 1.0 0.0
+225.0 175.0
+0.0 18.0       
+-19200 -20000
+triangle
+Camera
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.0 0.0 0.0
+50.0 100.0
+30.0 2.0      
+-19500 -19700
+square
+Object3
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.0 0.0 1.0
+175.0 225.0
+0.0  -15.0          
+-19000 -19200
+square
+Object4
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.0 1.0 1.0
+140.0 180.0
+-30.0 20.0
+-20000 -19400
+circle
+Object5
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+1.0 0.0 1.0
+220.0 220.0
+0.0 0.0       # not much point in setting orientation parameters for circular objects
+-19600 -19600
+square              
+Object6
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+1.0 0.4 0.5
+400.0 150.0
+0.0  -22.5                  
+-20300 -20000
+circle
+Object7
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.0 0.8 0.5
+225.0 175.0
+0.0  -1.2       
+-18800 -20000
+circle
+Object8
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.3 0.0 0.5
+100.0 100.0
+0.0 -1.2       
+-20300 -19500
+square
+Object9
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.3 0.2 0.5
+100.0 100.0
+45.0 10.5
+-20100 -19700
+square
+Object10
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+0.5 0.5 0.5
+250.0 120.0
+0.0 -13.5        
+-19000 -19600
+square
+Object11
+tutorial4-shdrpgm ../shaders/tutorial-4.vert ../shaders/tutorial-4.frag
+1.0 0.5 0.5
+520.0 420.0
+0.0 10.6      
+-19600 -19000
