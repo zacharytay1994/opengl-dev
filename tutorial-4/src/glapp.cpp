@@ -83,11 +83,13 @@ void GLApp::update(double delta_time) {
 void GLApp::draw() {
 	// title bar
 	std::stringstream ss;
-	ss	<< GLHelper::title	<< " | "
-		<< objects.size()	<< " objects | "
-		<< box_count		<< " box | "
-		<< mystery_count	<< " mystery stuff | "
-		<< "fps: " << GLHelper::fps	<< " | ";
+	ss << std::fixed;
+	ss.precision(2);
+	ss << GLHelper::title << " | "
+		<< "FPS: " << GLHelper::fps << " | "
+		<< "Camera position: (" << camera2d.pgo->position.x << "," << camera2d.pgo->position.y << ") | "
+		<< "Camera orientation: " << (int)(camera2d.pgo->orientation.x * (180.0f / 3.14f)) << " degrees | "
+		<< "Window height: " << camera2d.height;
 	glfwSetWindowTitle(GLHelper::ptr_window, ss.str().c_str());
 
 	// clear back buffer as before
@@ -144,6 +146,11 @@ void GLApp::insert_shdrpgm(std::string shdr_pgm_name, std::string vtx_shdr, std:
 
 void GLApp::init_scene(std::string scene_filename)
 {
+	/*
+		Step 1:
+		==========
+		Open the scene file and check if successful.
+	*/
 	std::ifstream ifs{ scene_filename, std::ios::in };
 	if (!ifs)
 	{
@@ -151,28 +158,47 @@ void GLApp::init_scene(std::string scene_filename)
 			<< scene_filename << "\n";
 		exit(EXIT_FAILURE);
 	}
+	/*	Puts file cursor to the start of the file. */
 	ifs.seekg(0, std::ios::beg);
 
+	/*
+		Step 2:
+		==========
+		Read the object count, i.e. number of objects to create in the scene.
+	*/
 	std::string line;
 	getline(ifs, line);
 	std::istringstream line_sstm{ line };
 	int obj_cnt;
 	line_sstm >> obj_cnt;	// read count of objects in scene
+	/*
+		Step 3:
+		==========
+		For each object count:
+		1. Create a new GLObject 
+		2. Read the model name and check if model already exist in models container
+			if not, load the model from the ../meshes/*.msh file.
+		3. 
+	*/
 	while (obj_cnt--)
 	{
+		/* 1. Create a new GLObject */
+		GLObject new_object;
+
+		/* 2. Read the model name */
 		getline(ifs, line);	// 1st parameter: model's name
 		std::istringstream line_modelname{ line };
 		std::string model_name;
 		line_modelname >> model_name;
 
-		GLObject new_object;
-
-		/* TODO: if model with name model_name is not present in std::map container
-		called models, then add this model to the container */
+		/* Check if model already exist in models container */
 		if (models.find(model_name) == models.end())
 		{
-			// not found - read model from file and create new vao
+			// Not exist - read model from file and create new vao
+			/* Create new GLModel object to store the new model to be read from file */
 			GLModel new_model;
+
+			/* Open model file */
 			std::ifstream ifs{ "../meshes/"+model_name+".msh" , std::ios::in };
 			if (!ifs)
 			{
@@ -181,14 +207,24 @@ void GLApp::init_scene(std::string scene_filename)
 				exit(EXIT_FAILURE);
 			}
 			ifs.seekg(0, std::ios::beg);
+			
+			/* Create 2 containers, one for vertices and one for indices */
 			std::vector<float> vertices;
 			std::vector<GLushort> indices;
 			std::string line;
+
+			/* Read each line in the models file */
 			while (std::getline(ifs, line))
 			{
+				/* Read the first character of the line */
 				std::istringstream iss (line);
 				char c; double vertex; int index;
 				iss >> c;
+				
+				/*	if n: do nothing, it is the model name 
+					if v: they are vertices, push the remaining line into the vertices container
+					if t: they are indices of GL_TRIANGLES, push the remaining line into the indices container
+					if f: they are indices of GL_TRIANGLE_FAN, push the remaining line into the indices container */
 				switch (c)
 				{
 				case 'n':
@@ -217,17 +253,8 @@ void GLApp::init_scene(std::string scene_filename)
 					break;
 				}
 			}
-			/*for (auto& v : vertices)
-			{
-				std::cout << v << ",";
-			}
-			std::cout << "\n";
-			for (auto& i : indices)
-			{
-				std::cout << i << ",";
-			}
-			std::cout << "\n";*/
 
+			/* Create a new vbo, vao, and ebo from the vertices and indices containers read above */
 			// create new mdl_ref
 			GLuint vbo, vao, ebo;
 			// vbo
@@ -246,17 +273,20 @@ void GLApp::init_scene(std::string scene_filename)
 			// unbind vao
 			glBindVertexArray(0);
 			
-			// create new model and add to container
+			/* Give the new GLModel created above all the details of the loaded model from file */
 			new_model.vaoid = vao;
 			new_model.draw_cnt = indices.size();
 			new_model.primitive_cnt = 0;	// not used
+			/* Push the new GLModel back into the models container */
 			models[model_name] = new_model;
 			// give new_object model ref
+			/* Give the new GLObject created above the model reference that is now in the models container */
 			new_object.mdl_ref = models.find(model_name);
 		}
 		else
 		{
-			// found - use existing mdl_ref
+			// exist - use existing mdl_ref
+			/* Give the new GLObject created above the model reference that already exists in the models container */
 			new_object.mdl_ref = models.find(model_name);
 		}
 

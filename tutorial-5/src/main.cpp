@@ -106,7 +106,7 @@ Get handle to OpenGL context through GLHelper::GLFWwindow*.
 */
 static void init() {
   // Part 1
-  if (!GLHelper::init(1200, 800, "Tutorial 4")) {
+  if (!GLHelper::init(1280, 960, "Tutorial 5")) {
     std::cout << "Unable to create OpenGL context" << std::endl;
     std::exit(EXIT_FAILURE);
   }
