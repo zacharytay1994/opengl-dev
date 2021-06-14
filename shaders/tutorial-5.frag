@@ -59,10 +59,11 @@ void main ()
 		}
 	}
 
-	// duck
+	// 1 duck
 	else if (uMode == 3) {
 		fFragColor = texture(uTex2d, vTexCoord);
 	}
+	// multiple ducks
 	else if (uMode >= 4) {
 		fFragColor = texture(uTex2d, vTexCoord2);
 	}
@@ -72,6 +73,6 @@ void main ()
 		fFragColor = vec4(	fFragColor.x*vInterpColor.x,
 							fFragColor.y*vInterpColor.y,
 							fFragColor.z*vInterpColor.z, 
-							1.0f	);
+							fFragColor.a	);
 	}
 }
