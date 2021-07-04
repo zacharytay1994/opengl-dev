@@ -10,9 +10,9 @@ glpbo.h for tutorial-6.
 
 /*                                                                   includes
 ----------------------------------------------------------------------------- */
-#include "include/glpbo.h"
-#include "include/glhelper.h"
-#include "include/glslshader.h"
+#include "glpbo.h"
+#include "glhelper.h"
+#include "glslshader.h"
 #include <iostream>
 #include <sstream>
 

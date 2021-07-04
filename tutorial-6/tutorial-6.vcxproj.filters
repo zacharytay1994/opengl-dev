@@ -27,7 +27,7 @@
     <ClCompile Include="src\main-pbo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="glpbo.cpp">
+    <ClCompile Include="src\glpbo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

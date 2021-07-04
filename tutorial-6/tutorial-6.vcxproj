@@ -141,9 +141,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glpbo.cpp" />
     <ClCompile Include="src\glapp.cpp" />
     <ClCompile Include="src\glhelper.cpp" />
+    <ClCompile Include="src\glpbo.cpp" />
     <ClCompile Include="src\glslshader.cpp" />
     <ClCompile Include="src\main-pbo.cpp" />
   </ItemGroup>
