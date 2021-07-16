@@ -72,6 +72,8 @@ void GLPbo::draw_fullwindow_quad()
 	glBindVertexArray(vaoid);
 	// draw
 	glDrawElements(GL_TRIANGLE_STRIP, elem_cnt, GL_UNSIGNED_SHORT, nullptr);
+	// unuse shader
+	shdr_pgm.UnUse();
 }
 
 /*!
@@ -81,8 +83,8 @@ void GLPbo::draw_fullwindow_quad()
 void GLPbo::init(GLsizei w, GLsizei h)
 {
 	// part 3.1, set static data members
-	width = GLHelper::width;
-	height = GLHelper::height;
+	width = w;
+	height = h;
 	pixel_cnt = width * height;
 	byte_cnt = pixel_cnt * sizeof(Color);
 
@@ -286,7 +288,6 @@ void GLPbo::clear_color_buffer()
 	std::fill_n(ptr_to_pbo, 1, GLPbo::clear_clr);
 	filled_pixels += 1;
 	empty_pixels = GLPbo::pixel_cnt - filled_pixels;
-	int count = 0;
 	// start using memcpy to duplicate fills
 	while (empty_pixels > 0)
 	{

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{78539c0a-77fb-416f-a0d9-616449590a8c}</ProjectGuid>
-    <RootNamespace>tutorial6</RootNamespace>
+    <ProjectGuid>{30c7dce0-6626-47f9-b7d1-17c119ca62bf}</ProjectGuid>
+    <RootNamespace>tutorial7ass</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -59,11 +59,10 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\prop-pages\tutorial-1.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\prop-pages\tutorial-1.props" />
+    <Import Project="..\prop-pages\assignmentjm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -141,15 +140,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\glhelper.h" />
+    <ClInclude Include="include\glpbo.h" />
+    <ClInclude Include="include\glslshader.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\glhelper.cpp" />
     <ClCompile Include="src\glpbo.cpp" />
     <ClCompile Include="src\glslshader.cpp" />
     <ClCompile Include="src\main-pbo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\glhelper.h" />
-    <ClInclude Include="include\glpbo.h" />
-    <ClInclude Include="include\glslshader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
